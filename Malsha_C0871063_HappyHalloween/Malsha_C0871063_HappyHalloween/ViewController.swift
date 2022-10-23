@@ -23,6 +23,8 @@ class ViewController: UIViewController {
     
     var questionList = [Question]()
     var selectedQuestion : Question?
+    var timer = Timer()
+    var seconds = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,15 +52,34 @@ class ViewController: UIViewController {
     }
     
     private func refreshData(){
-        livesCount = 5
-        pointCount = 0
+
         iconImage.image = UIImage(named: "QuestionMark")
         answerOneBtn.setTitle("???", for: .normal)
         answerTwoBtn.setTitle("???", for: .normal)
         answerThreeBtn.setTitle("???", for: .normal)
         answerFourBtn.setTitle("???", for: .normal)
-        startBtn.isHidden = false
+//        startBtn.isHidden = false
         updateScoreAndLives(score: pointCount, lives: livesCount)
+        seconds = 0
+        timer.invalidate()
+    }
+    
+    private func startTimer(){
+        timer = Timer.scheduledTimer(timeInterval:1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+    }
+    
+    @objc func timerAction(){
+        if(seconds == 5) {
+            if livesCount == 0 {
+                gameOver()
+            }else{
+                livesCount -= 1
+                updateScoreAndLives(score: pointCount, lives: livesCount)
+                displayImage()
+            }
+        }else{
+            seconds += 1
+        }
     }
     
     @IBAction func startGame(_ sender: Any) {
@@ -104,8 +125,11 @@ class ViewController: UIViewController {
     }
     
     private func displayImage(){
+
         if livesCount > 0 {
-            
+            seconds = 0
+            timer.invalidate()
+            startTimer()
             selectedQuestion = questionList.randomElement()
             iconImage.image = selectedQuestion?.image
             answerOneBtn.setTitle(selectedQuestion?.answerOne, for: .normal)
@@ -114,14 +138,7 @@ class ViewController: UIViewController {
             answerFourBtn.setTitle(selectedQuestion?.answerFour, for: .normal)
             
         }else{
-            let alert = UIAlertController(title: "Game Over", message: "Do you want to play again?", preferredStyle: .alert)
-            let noAction = UIAlertAction(title: "No", style: .cancel)
-            let yesAction = UIAlertAction(title: "Yes", style: .default, handler: {_ in
-                self.refreshData()
-            })
-            alert.addAction(noAction)
-            alert.addAction(yesAction)
-            self.present(alert, animated: true)
+            gameOver()
         }
     }
     
@@ -136,6 +153,21 @@ class ViewController: UIViewController {
     private func updateScoreAndLives(score : Int , lives : Int){
         livesLbl.text = "Lives : " + String(livesCount)
         pointsLbl.text = "Points : " + String(pointCount)
-    }    
+    }
+    
+    private func gameOver(){
+        refreshData()
+        let alert = UIAlertController(title: "Game Over", message: "Do you want to play again?", preferredStyle: .alert)
+        let noAction = UIAlertAction(title: "No", style: .cancel)
+        let yesAction = UIAlertAction(title: "Yes", style: .default, handler: {_ in
+            self.startBtn.isHidden = false
+            self.livesCount = 5
+            self.pointCount = 0
+            self.updateScoreAndLives(score: self.pointCount, lives: self.livesCount)
+        })
+        alert.addAction(noAction)
+        alert.addAction(yesAction)
+        self.present(alert, animated: true)
+    }
 }
 
