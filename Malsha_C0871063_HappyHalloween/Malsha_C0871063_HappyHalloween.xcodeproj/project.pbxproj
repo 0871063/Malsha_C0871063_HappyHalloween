@@ -13,6 +13,7 @@
 		2CDE141C2905E63500AA4B3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CDE141A2905E63500AA4B3A /* Main.storyboard */; };
 		2CDE141E2905E63600AA4B3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CDE141D2905E63600AA4B3A /* Assets.xcassets */; };
 		2CDE14212905E63600AA4B3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CDE141F2905E63600AA4B3A /* LaunchScreen.storyboard */; };
+		2CDE14292905F8F700AA4B3A /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE14282905F8F700AA4B3A /* Question.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		2CDE141D2905E63600AA4B3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CDE14202905E63600AA4B3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2CDE14222905E63600AA4B3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CDE14282905F8F700AA4B3A /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				2CDE141D2905E63600AA4B3A /* Assets.xcassets */,
 				2CDE141F2905E63600AA4B3A /* LaunchScreen.storyboard */,
 				2CDE14222905E63600AA4B3A /* Info.plist */,
+				2CDE14282905F8F700AA4B3A /* Question.swift */,
 			);
 			path = Malsha_C0871063_HappyHalloween;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CDE14192905E63400AA4B3A /* ViewController.swift in Sources */,
+				2CDE14292905F8F700AA4B3A /* Question.swift in Sources */,
 				2CDE14152905E63400AA4B3A /* AppDelegate.swift in Sources */,
 				2CDE14172905E63400AA4B3A /* SceneDelegate.swift in Sources */,
 			);

@@ -89,7 +89,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
                                                 <color key="backgroundColor" red="0.95401095359999999" green="0.57446051190000003" blue="0.15407947150000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="150" id="UIM-Fx-14A"/>
+                                                    <constraint firstAttribute="height" constant="50" id="gd4-ok-XVI"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -136,6 +136,7 @@
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="FpR-J3-V6b" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="FQx-Md-Zz3"/>
+                            <constraint firstItem="Vd5-JU-XXv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="35" id="Hnt-mf-IAR"/>
                             <constraint firstItem="LAD-fB-Dxq" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="MT4-TW-B7t"/>
                             <constraint firstAttribute="bottom" secondItem="mnN-lK-kwx" secondAttribute="bottom" constant="30" id="Ml3-n7-sW2"/>
                             <constraint firstItem="Vd5-JU-XXv" firstAttribute="top" secondItem="DoC-aw-dZl" secondAttribute="bottom" constant="40" id="OCc-r7-Ftg"/>
@@ -144,6 +145,7 @@
                             <constraint firstItem="FpR-J3-V6b" firstAttribute="top" secondItem="LAD-fB-Dxq" secondAttribute="bottom" constant="10" id="YjK-9L-E5P"/>
                             <constraint firstItem="Vd5-JU-XXv" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="cCU-zX-gfS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5yh-tF-Uh4" secondAttribute="trailing" constant="35" id="cWa-yM-fRt"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Vd5-JU-XXv" secondAttribute="trailing" constant="35" id="cjE-Ff-uh5"/>
                             <constraint firstItem="Vd5-JU-XXv" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="dHK-QT-VTe"/>
                             <constraint firstItem="5yh-tF-Uh4" firstAttribute="top" secondItem="Vd5-JU-XXv" secondAttribute="bottom" constant="40" id="gix-pG-q2l"/>
                             <constraint firstItem="5yh-tF-Uh4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="35" id="hTS-cR-EBP"/>

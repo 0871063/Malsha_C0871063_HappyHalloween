@@ -19,15 +19,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var answerOneBtn: UIButton!
     
     var pointCount = 0
-    var livesCount = 10
+    var livesCount = 5
+    
+    var questionList = [Question]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshData()
         // Do any additional setup after loading the view.
     }
     
     private func refreshData(){
-        livesCount = 10
+        livesCount = 5
         pointCount = 0
         iconImage.image = UIImage(named: "QuestionMark")
         answerOneBtn.setTitle("???", for: .normal)
@@ -40,15 +43,60 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startGame(_ sender: Any) {
+        startBtn.isHidden = true
+        displayImage()
     }
     
     @IBAction func answerOneClicked() {
+        if validateAnswer(){
+            pointCount += 1
+        }else{
+            livesCount -= 1
+        }
+        displayImage()
     }
     @IBAction func answerTwoClicked() {
+        if validateAnswer(){
+            pointCount += 1
+        }else{
+            livesCount -= 1
+        }
+        displayImage()
     }
     @IBAction func answerThreeClicked() {
+        if validateAnswer(){
+            pointCount += 1
+        }else{
+            livesCount -= 1
+        }
+        displayImage()
     }
     @IBAction func answerFourClicked() {
+        if validateAnswer(){
+            pointCount += 1
+        }else{
+            livesCount -= 1
+        }
+        displayImage()
+    }
+    
+    private func displayImage(){
+        if livesCount > 0 {
+            
+        }else{
+            let alert = UIAlertController(title: "Game Over", message: "Do you want to play again?", preferredStyle: .alert)
+            let noAction = UIAlertAction(title: "No", style: .cancel)
+            let yesAction = UIAlertAction(title: "Yes", style: .default, handler: {_ in
+                self.refreshData()
+            })
+            alert.addAction(noAction)
+            alert.addAction(yesAction)
+            self.present(alert, animated: true)
+        }
+    }
+    
+    private func validateAnswer() -> Bool{
+        return true
     }
     
 }
