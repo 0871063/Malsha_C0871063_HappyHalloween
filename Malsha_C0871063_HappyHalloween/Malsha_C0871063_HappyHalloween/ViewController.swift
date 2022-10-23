@@ -51,37 +51,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    private func refreshData(){
-
-        iconImage.image = UIImage(named: "QuestionMark")
-        answerOneBtn.setTitle("???", for: .normal)
-        answerTwoBtn.setTitle("???", for: .normal)
-        answerThreeBtn.setTitle("???", for: .normal)
-        answerFourBtn.setTitle("???", for: .normal)
-//        startBtn.isHidden = false
-        updateScoreAndLives(score: pointCount, lives: livesCount)
-        seconds = 0
-        timer.invalidate()
-    }
-    
-    private func startTimer(){
-        timer = Timer.scheduledTimer(timeInterval:1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-    }
-    
-    @objc func timerAction(){
-        if(seconds == 5) {
-            if livesCount == 0 {
-                gameOver()
-            }else{
-                livesCount -= 1
-                updateScoreAndLives(score: pointCount, lives: livesCount)
-                displayImage()
-            }
-        }else{
-            seconds += 1
-        }
-    }
-    
     @IBAction func startGame(_ sender: Any) {
         startBtn.isHidden = true
         displayImage()
@@ -96,6 +65,7 @@ class ViewController: UIViewController {
         updateScoreAndLives(score: pointCount, lives: livesCount)
         displayImage()
     }
+    
     @IBAction func answerTwoClicked() {
         if validateAnswer(answer: answerTwoBtn.titleLabel?.text ?? ""){
             pointCount += 1
@@ -105,6 +75,7 @@ class ViewController: UIViewController {
         updateScoreAndLives(score: pointCount, lives: livesCount)
         displayImage()
     }
+    
     @IBAction func answerThreeClicked() {
         if validateAnswer(answer: answerThreeBtn.titleLabel?.text ?? ""){
             pointCount += 1
@@ -114,6 +85,7 @@ class ViewController: UIViewController {
         updateScoreAndLives(score: pointCount, lives: livesCount)
         displayImage()
     }
+    
     @IBAction func answerFourClicked() {
         if validateAnswer(answer: answerFourBtn.titleLabel?.text ?? ""){
             pointCount += 1
@@ -125,7 +97,6 @@ class ViewController: UIViewController {
     }
     
     private func displayImage(){
-
         if livesCount > 0 {
             seconds = 0
             timer.invalidate()
@@ -168,6 +139,35 @@ class ViewController: UIViewController {
         alert.addAction(noAction)
         alert.addAction(yesAction)
         self.present(alert, animated: true)
+    }
+    
+    private func startTimer(){
+        timer = Timer.scheduledTimer(timeInterval:1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+    }
+    
+    private func refreshData(){
+        iconImage.image = UIImage(named: "QuestionMark")
+        answerOneBtn.setTitle("???", for: .normal)
+        answerTwoBtn.setTitle("???", for: .normal)
+        answerThreeBtn.setTitle("???", for: .normal)
+        answerFourBtn.setTitle("???", for: .normal)
+        updateScoreAndLives(score: pointCount, lives: livesCount)
+        seconds = 0
+        timer.invalidate()
+    }
+    
+    @objc func timerAction(){
+        if(seconds == 5) {
+            if livesCount == 0 {
+                gameOver()
+            }else{
+                livesCount -= 1
+                updateScoreAndLives(score: pointCount, lives: livesCount)
+                displayImage()
+            }
+        }else{
+            seconds += 1
+        }
     }
 }
 
