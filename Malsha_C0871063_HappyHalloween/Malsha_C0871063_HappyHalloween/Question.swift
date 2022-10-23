@@ -9,9 +9,10 @@ import Foundation
 import UIKit
 
 struct Question {
-    var Image : UIImage
+    var image : UIImage? = nil
     var answerOne : String = ""
     var answerTwo : String = ""
     var answerThree : String = ""
     var answerFour : String = ""
+    var correctAnswer : String = ""
 }

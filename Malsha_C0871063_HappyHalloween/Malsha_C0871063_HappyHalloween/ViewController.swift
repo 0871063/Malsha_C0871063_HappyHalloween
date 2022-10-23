@@ -22,10 +22,30 @@ class ViewController: UIViewController {
     var livesCount = 5
     
     var questionList = [Question]()
+    var selectedQuestion : Question?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshData()
+        questionList.append(Question(image: UIImage(named: "Pumpkin"),answerOne: "Carrot", answerTwo: "Apple", answerThree: "Banana", answerFour: "Pumpkin", correctAnswer: "Pumpkin"))
+        
+        questionList.append(Question(image: UIImage(named: "Ghost"),answerOne: "Man", answerTwo: "Ghost", answerThree: "Dog", answerFour: "Bird", correctAnswer: "Ghost"))
+        
+        questionList.append(Question(image: UIImage(named: "Candy"),answerOne: "Cake", answerTwo: "Bread", answerThree: "Candy", answerFour: "Chocolate", correctAnswer: "Candy"))
+        
+        questionList.append(Question(image: UIImage(named: "Pot"),answerOne: "Pot", answerTwo: "Spoon", answerThree: "Knife", answerFour: "Plate", correctAnswer: "Pot"))
+        
+        questionList.append(Question(image: UIImage(named: "Hat"),answerOne: "Neckless", answerTwo: "Baloon", answerThree: "Hat", answerFour: "Socks", correctAnswer: "Hat"))
+        
+        questionList.append(Question(image: UIImage(named: "Broom"),answerOne: "Jug", answerTwo: "Broom", answerThree: "Bowl", answerFour: "Plate", correctAnswer: "Broom"))
+        
+        questionList.append(Question(image: UIImage(named: "Witch"),answerOne: "Witch", answerTwo: "Man", answerThree: "Cat", answerFour: "Dog", correctAnswer: "Witch"))
+        
+        questionList.append(Question(image: UIImage(named: "Spider"),answerOne: "Snake", answerTwo: "Hat", answerThree: "Dog", answerFour: "Spider", correctAnswer: "Spider"))
+        
+        questionList.append(Question(image: UIImage(named: "Cat"),answerOne: "Bat", answerTwo: "Hat", answerThree: "Cat", answerFour: "Spider", correctAnswer: "Cat"))
+        
+        questionList.append(Question(image: UIImage(named: "Bat"),answerOne: "Bat", answerTwo: "Snake", answerThree: "Dog", answerFour: "Spider", correctAnswer: "Bat"))
         // Do any additional setup after loading the view.
     }
     
@@ -38,8 +58,7 @@ class ViewController: UIViewController {
         answerThreeBtn.setTitle("???", for: .normal)
         answerFourBtn.setTitle("???", for: .normal)
         startBtn.isHidden = false
-        livesLbl.text = "Lives : " + String(livesCount)
-        pointsLbl.text = "Points : " + String(pointCount)
+        updateScoreAndLives(score: pointCount, lives: livesCount)
     }
     
     @IBAction func startGame(_ sender: Any) {
@@ -48,40 +67,51 @@ class ViewController: UIViewController {
     }
     
     @IBAction func answerOneClicked() {
-        if validateAnswer(){
+        if validateAnswer(answer: answerOneBtn.titleLabel?.text ?? ""){
             pointCount += 1
         }else{
             livesCount -= 1
         }
+        updateScoreAndLives(score: pointCount, lives: livesCount)
         displayImage()
     }
     @IBAction func answerTwoClicked() {
-        if validateAnswer(){
+        if validateAnswer(answer: answerTwoBtn.titleLabel?.text ?? ""){
             pointCount += 1
         }else{
             livesCount -= 1
         }
+        updateScoreAndLives(score: pointCount, lives: livesCount)
         displayImage()
     }
     @IBAction func answerThreeClicked() {
-        if validateAnswer(){
+        if validateAnswer(answer: answerThreeBtn.titleLabel?.text ?? ""){
             pointCount += 1
         }else{
             livesCount -= 1
         }
+        updateScoreAndLives(score: pointCount, lives: livesCount)
         displayImage()
     }
     @IBAction func answerFourClicked() {
-        if validateAnswer(){
+        if validateAnswer(answer: answerFourBtn.titleLabel?.text ?? ""){
             pointCount += 1
         }else{
             livesCount -= 1
         }
+        updateScoreAndLives(score: pointCount, lives: livesCount)
         displayImage()
     }
     
     private func displayImage(){
         if livesCount > 0 {
+            
+            selectedQuestion = questionList.randomElement()
+            iconImage.image = selectedQuestion?.image
+            answerOneBtn.setTitle(selectedQuestion?.answerOne, for: .normal)
+            answerTwoBtn.setTitle(selectedQuestion?.answerTwo, for: .normal)
+            answerThreeBtn.setTitle(selectedQuestion?.answerThree, for: .normal)
+            answerFourBtn.setTitle(selectedQuestion?.answerFour, for: .normal)
             
         }else{
             let alert = UIAlertController(title: "Game Over", message: "Do you want to play again?", preferredStyle: .alert)
@@ -95,9 +125,17 @@ class ViewController: UIViewController {
         }
     }
     
-    private func validateAnswer() -> Bool{
-        return true
+    private func validateAnswer(answer : String) -> Bool{
+        if answer == selectedQuestion?.correctAnswer {
+            return true
+        }else{
+            return false
+        }
     }
     
+    private func updateScoreAndLives(score : Int , lives : Int){
+        livesLbl.text = "Lives : " + String(livesCount)
+        pointsLbl.text = "Points : " + String(pointCount)
+    }    
 }
 
