@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var answerThreeBtn: UIButton!
     @IBOutlet weak var answerTwoBtn: UIButton!
     @IBOutlet weak var answerOneBtn: UIButton!
+    @IBOutlet weak var markListButton: UIButton!
     
     var pointCount = 0
     var livesCount = 5
@@ -25,6 +26,7 @@ class ViewController: UIViewController {
     var selectedQuestion : Question?
     var timer = Timer()
     var seconds = 0
+    var pointList = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +55,7 @@ class ViewController: UIViewController {
     
     @IBAction func startGame(_ sender: Any) {
         startBtn.isHidden = true
+        markListButton.isHidden = true
         displayImage()
     }
     
@@ -127,9 +130,16 @@ class ViewController: UIViewController {
     }
     
     private func gameOver(){
+        pointList.append(pointCount)
         refreshData()
         let alert = UIAlertController(title: "Game Over", message: "Do you want to play again?", preferredStyle: .alert)
-        let noAction = UIAlertAction(title: "No", style: .cancel)
+        let noAction = UIAlertAction(title: "No", style: .default, handler: {_ in
+            self.startBtn.isHidden = true
+            self.answerOneBtn.isEnabled = false
+            self.answerTwoBtn.isEnabled = false
+            self.answerThreeBtn.isEnabled = false
+            self.answerFourBtn.isEnabled = false
+        })
         let yesAction = UIAlertAction(title: "Yes", style: .default, handler: {_ in
             self.startBtn.isHidden = false
             self.livesCount = 5
@@ -139,6 +149,7 @@ class ViewController: UIViewController {
         alert.addAction(noAction)
         alert.addAction(yesAction)
         self.present(alert, animated: true)
+        self.markListButton.isHidden = false
     }
     
     private func startTimer(){
@@ -155,6 +166,14 @@ class ViewController: UIViewController {
         seconds = 0
         timer.invalidate()
     }
+    
+    @IBAction func navigateMarkList() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let folderListController = storyboard.instantiateViewController(withIdentifier: "MarkListViewController") as! MarkListViewController
+        folderListController.pointList = self.pointList
+        present(folderListController, animated: true)
+    }
+
     
     @objc func timerAction(){
         if(seconds == 5) {
